@@ -12,25 +12,8 @@ interface IP {
 @inject('globalStore', 'routerStore')
 @observer
 class Home extends React.Component<IP> {
-    @computed
-    get hello() {
-        const { test } = this.props.globalStore
-        return test ? test.hello : ''
-    }
-
-    routerTest = () => {
-        this.props.routerStore.push('/error')
-    }
-
     render() {
-        return (
-            <div>
-                <h1 className={styles.routerTest} onClick={this.routerTest}>
-                    Hello World!
-                </h1>
-                {this.hello}
-            </div>
-        )
+        return <div>Hello World!</div>
     }
 }
 
