@@ -1,20 +1,20 @@
-const path = require('path');
-let utils = require('steamer-webpack-utils');
-let steamerConfig = require('./steamer.config');
-let __basename = path.dirname(__dirname);
-let __env = process.env.NODE_ENV || 'development';
-let __app_env = process.env.APP_ENV || 'dev';
+const path = require('path')
+let utils = require('steamer-webpack-utils')
+let steamerConfig = require('./steamer.config')
+let __basename = path.dirname(__dirname)
+let __env = process.env.NODE_ENV || 'development'
+let __app_env = process.env.APP_ENV || 'dev'
 
-let isProduction = __env === 'production';
+let isProduction = __env === 'production'
 
-let srcPath = path.resolve(__basename, 'src');
-let devPath = path.resolve(__basename, 'dev');
-let distPath = path.resolve(__basename, 'dist');
-let spritePath = path.resolve(__basename, 'src/img/sprites');
+let srcPath = path.resolve(__basename, 'src')
+let devPath = path.resolve(__basename, 'dev')
+let distPath = path.resolve(__basename, 'dist')
+let spritePath = path.resolve(__basename, 'src/img/sprites')
 
-let hash = '[hash:6]';
-let chunkhash = '[chunkhash:6]';
-let contenthash = '[contenthash:6]';
+let hash = '[hash:6]'
+let chunkhash = '[chunkhash:6]'
+let contenthash = '[contenthash:6]'
 
 // ========================= webpack快捷配置 =========================
 // 基本情况下，你只需要关注这里的配置
@@ -28,8 +28,7 @@ let config = {
     npm: 'npm',
 
     webpack: {
-
-        useCdn: true,  // 是否使用webserver, cdn 分离 html 与其它静态资源
+        useCdn: true, // 是否使用webserver, cdn 分离 html 与其它静态资源
 
         // ========================= webpack路径与url =========================
         // 项目路径
@@ -46,8 +45,10 @@ let config = {
         // 开发服务器配置
         webserver: `${steamerConfig.webserver}:${steamerConfig.port}/`,
         cdn: `${steamerConfig.cdn}/react-app/dist/${__app_env}/`,
-        cssCdn: `${steamerConfig.cssCdn || steamerConfig.cdn}/react-app/dist/${__app_env}/`,
-        imgCdn: `${steamerConfig.imgCdn || steamerConfig.cdn}/react-app/dist/${__app_env}/`,
+        cssCdn: `${steamerConfig.cssCdn ||
+            steamerConfig.cdn}/react-app/dist/${__app_env}/`,
+        imgCdn: `${steamerConfig.imgCdn ||
+            steamerConfig.cdn}/react-app/dist/${__app_env}/`,
         port: steamerConfig.port, // port for local server
         route: [], // proxy route, 例如: /news/
 
@@ -68,15 +69,13 @@ let config = {
         // 参考文章： https://segmentfault.com/a/1190000004280859
         sourceMap: {
             development: 'cheap-module-eval-source-map',
-            production: false,
+            production: false
         },
 
         cssSourceMap: false,
 
         // 预编译器，默认支持css 和 less. sass, scss 和 stylus，会自动安装
-        style: [
-            'css', 'scss'
-        ],
+        style: ['css', 'scss'],
 
         // 生产环境是否提取css
         extractCss: true,
@@ -90,9 +89,7 @@ let config = {
         spriteStyle: 'scss',
 
         // html 模板. 默认支持html 和 ejs, handlebars 和 pug(原jade)，art(art-template) 会自动安装
-        template: [
-            'html'
-        ],
+        template: ['html'],
 
         // 生产环境下资源(js, css, html)是否压缩
         compress: true,
@@ -115,16 +112,16 @@ let config = {
 
         // webpack resolve.alias 包别名
         alias: {
-            'env': path.join(srcPath, 'env', `${__app_env}.ts`)
+            env: path.join(srcPath, 'env', `${__app_env}.ts`)
         },
 
         // 文件名与哈希, hash, chunkhash, contenthash 与webpack的哈希配置对应
         hash: hash,
         chunkhash: chunkhash,
         contenthash: contenthash,
-        hashName: isProduction ? ('[name]-' + hash) : '[name]',
-        chunkhashName: isProduction ? ('[name]-' + chunkhash) : '[name]',
-        contenthashName: isProduction ? ('[name]-' + contenthash) : '[name]',
+        hashName: isProduction ? '[name]-' + hash : '[name]',
+        chunkhashName: isProduction ? '[name]-' + chunkhash : '[name]',
+        contenthashName: isProduction ? '[name]-' + contenthash : '[name]',
 
         // ========================= webpack entry配置 =========================
         // 多页模式
@@ -174,10 +171,12 @@ let config = {
         // })),
 
         // 单页模式
-        html: [{
-            key: 'index',
-            path: path.join(srcPath, 'main.html')
-        }],
+        html: [
+            {
+                key: 'index',
+                path: path.join(srcPath, 'main.html')
+            }
+        ],
 
         // 自动扫描合图，配合webpack-spritesmith插件
         /**
@@ -196,9 +195,8 @@ let config = {
         sprites: utils.getSpriteEntry({
             srcPath: spritePath
         })
-
     }
-};
+}
 
 // ========================= webpack深度配置 =========================
 // 使用了webpack-merge与webpack.base.js进行配置合并
@@ -206,65 +204,65 @@ let config = {
 config.custom = {
     // webpack output
     getOutput: function() {
-        return {};
+        return {}
     },
 
     // webpack module
     getModule: function() {
         let module = {
             rules: []
-        };
+        }
 
-        return module;
+        return module
     },
 
     // webpack resolve
     getResolve: function() {
         return {
             alias: config.webpack.alias
-        };
+        }
     },
 
     // webpack plugins
     getPlugins: function() {
-        let plugins = [];
+        let plugins = []
 
-        return plugins;
+        return plugins
     },
 
     // webpack externals
     getExternals: function() {
         if (isProduction) {
             return {
-                'react': 'React',
+                react: 'React',
                 'react-dom': 'ReactDOM',
-                'preact': 'preact'
-            };
+                preact: 'preact'
+            }
         }
 
-        return {};
+        return {}
     },
 
     // 其它 webpack 配置
     getOtherOptions: function() {
         return {
             optimization: {}
-        };
+        }
     }
-};
+}
 
 // ========================= webpack merge 的策略 =========================
 config.webpackMerge = {
     // webpack-merge smartStrategy 配置
     smartStrategyOption: {
         'module.rules': 'append',
-        'plugins': 'append'
+        plugins: 'append'
     },
 
     // 在smartStrategy merge 之前，用户可以先行对 webpack.base.js 的配置进行处理
     mergeProcess: function(webpackBaseConfig) {
-        return webpackBaseConfig;
+        return webpackBaseConfig
     }
-};
+}
 
-module.exports = config;
+module.exports = config

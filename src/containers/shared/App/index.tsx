@@ -7,12 +7,36 @@
  */
 
 import * as React from 'react'
+import Loadable from 'react-loadable'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 
-import HomePage from 'containers/views/Home'
-import NotFoundPage from 'containers/views/NotFound'
+import PageLoading from 'components/PageLoading'
 
 import * as styles from './style.scss'
+
+const Home = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "home" */ 'containers/views/Home'),
+    loading: PageLoading
+})
+
+const Login = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "login" */ 'containers/views/Login'),
+    loading: PageLoading
+})
+
+const Register = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "register" */ 'containers/views/Register'),
+    loading: PageLoading
+})
+
+const NotFoundPage = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "notFoundPage" */ 'containers/views/NotFound'),
+    loading: PageLoading
+})
 
 const AppWrapper = props => (
     <div className={styles.appWrapper}>{props.children}</div>
@@ -23,7 +47,9 @@ export default function App(props) {
         <AppWrapper>
             <Router>
                 <Switch>
-                    <Route exact path="/" component={HomePage} />
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/register" component={Register} />
                     <Route path="*" component={NotFoundPage} />
                     {/* <Route path="/features" component={FeaturePage} />
                     <Route path="" component={NotFoundPage} /> */}

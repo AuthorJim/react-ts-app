@@ -3,6 +3,7 @@
  */
 
 import axios, { AxiosResponse } from 'axios'
+import { Toast } from 'antd-mobile'
 import * as md5 from 'blueimp-md5'
 import * as qs from 'qs'
 import ENVCONFIG from 'env'
@@ -48,6 +49,7 @@ methods.forEach(method => {
         // 创建axios实例，配置全局追加请求参数
         requestInstance.interceptors.request.use(
             (cfg: AxiosRequestConfig) => {
+                Toast.loading('加载中', 0)
                 const ts = Date.now() / 1000
                 const queryData = {
                     ts
@@ -60,7 +62,10 @@ methods.forEach(method => {
 
         // 全局请求错误拦截
         requestInstance.interceptors.response.use(
-            response => response,
+            response => {
+                Toast.hide()
+                return response
+            },
             error => {
                 const errorDetail: IHttpError = {
                     msg: error.message || '网络故障',
