@@ -89,8 +89,11 @@ methods.forEach(method => {
         }
 
         return requestInstance
-            .request<IHttpResponse>(axiosConfig)
+            .request<any>(axiosConfig)
             .then(response => {
+                if (response.data.code === 1) {
+                    Toast.fail(response.data.msg)
+                }
                 let rdata: IHttpResponse
                 if (
                     typeof response.data === 'object' &&

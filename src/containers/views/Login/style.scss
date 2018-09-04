@@ -1,0 +1,14 @@
+@import 'styles/_base';
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    :global(.am-list) {
+        width: 100%;
+
+        :global(.am-list-body) {
+            background: #f3f5f7;
+        }
+    }
+}

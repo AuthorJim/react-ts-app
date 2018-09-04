@@ -5,28 +5,29 @@ mongoose.connect(DB_URL)
 mongoose.connection.on('connected', () => console.log('mongo 连接成功'))
 
 const models = {
-    blog: {
-        title: String,
-        author: String,
-        body: String,
-        comments: [{ body: String, date: Date }],
-        date: { type: Date, default: Date.now },
-        hidden: Boolean,
-        meta: {
-            votes: Number,
-            favs: Number
-        }
-    },
     user: {
         user: { type: String, require: true },
-        id: { type: Number, require: true }
-    }
+        pwd: { type: String, require: true },
+        type: { type: String, require: true },
+        //头像
+        avatar: { type: String },
+        // 个人简介或者职位简介
+        desc: { type: String },
+        // 职位名
+        title: { type: String },
+        // 如果你是boss 还有两个字段
+        company: { type: String },
+        money: { type: String }
+    },
+    chat: {}
 }
 
-for (const m in models) {
+for (let m in models) {
     mongoose.model(m, new mongoose.Schema(models[m]))
 }
 
 module.exports = {
-    getModel: name => mongoose.model(name)
+    getModel: function(name) {
+        return mongoose.model(name)
+    }
 }

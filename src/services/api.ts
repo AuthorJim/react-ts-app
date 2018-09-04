@@ -14,6 +14,13 @@ export async function demoRequest(id: string) {
     )
 }
 
-export async function testApi(data) {
-    return http.get('/blog/list', data)
+/**
+ * 登录
+ *
+ * @export
+ * @param {*} data
+ * @returns
+ */
+export async function login(data) {
+    return http.post('/user/login', data)
 }

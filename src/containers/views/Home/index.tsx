@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { observer, inject } from 'mobx-react'
-import { testApi } from '../../../services/api'
 import { Button } from 'antd-mobile'
 
 import * as styles from './style.scss'
