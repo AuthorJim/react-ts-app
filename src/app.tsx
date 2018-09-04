@@ -19,9 +19,9 @@ import 'sanitize.css/sanitize.css'
  * 这里开始你的第三方包依赖，包括css
  * Example
  *
- * import "antd/dist/antd.css"
  */
 
+// import 'antd/dist/antd.css'
 // app global style
 import './app.scss'
 

@@ -1,6 +1,6 @@
 import { stringify } from 'qs'
 import http from 'util/http'
-import { message } from 'antd'
+import { Toast } from 'antd-mobile'
 
 import { DEFAULT_HTTP_OPTION } from './contants'
 
@@ -12,4 +12,8 @@ export async function demoRequest(id: string) {
         },
         DEFAULT_HTTP_OPTION
     )
+}
+
+export async function testApi(data) {
+    return http.get('/data', data, DEFAULT_HTTP_OPTION)
 }

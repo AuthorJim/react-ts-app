@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { observer, inject } from 'mobx-react'
-import { computed } from 'mobx'
+import { testApi } from '../../../services/api'
+import { Button } from 'antd-mobile'
 
 import * as styles from './style.scss'
 
@@ -12,8 +13,16 @@ interface IP {
 @inject('globalStore', 'routerStore')
 @observer
 class Home extends React.Component<IP> {
+    handleClick = () => {
+        testApi({})
+    }
+
     render() {
-        return <div>Hello World!</div>
+        return (
+            <Button type="primary" onClick={this.handleClick}>
+                Hello World
+            </Button>
+        )
     }
 }
 
