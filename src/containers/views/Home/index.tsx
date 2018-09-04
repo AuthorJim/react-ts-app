@@ -15,7 +15,7 @@ interface IP {
 @observer
 class Home extends React.Component<IP> {
     handleClick = () => {
-        testApi({})
+        axios.get('/blog/list').then(res => console.log(res))
     }
 
     render() {

@@ -23,6 +23,7 @@
         "axios": "^0.18.0",
         "blueimp-md5": "^2.10.0",
         "bourbon": "^5.0.0",
+        "express-cors": "0.0.3",
         "lodash": "^4.17.10",
         "mobx": "^5.0.0",
         "mobx-react": "^5.2.2",
@@ -51,10 +52,12 @@
         "@types/webpack-env": "^1.13.6",
         "autoprefixer": "^8.3.0",
         "awesome-typescript-loader": "^5.0.0",
+        "body-parser": "^1.18.3",
         "browserslist": "^3.2.4",
         "cache-loader": "^1.2.2",
         "caniuse-db": "^1.0.30000830",
         "clean-webpack-plugin": "^0.1.19",
+        "cookie-parser": "^1.4.3",
         "copy-webpack-plugin-hash": "^6.0.0",
         "cross-env": "^5.1.4",
         "css-loader": "^0.28.11",
@@ -105,6 +108,7 @@
         "write-file-webpack-plugin": "^4.2.0"
     },
     "peerDependencies": {},
+    "proxy": "http://localhost:9003",
     "engines": {
         "node": ">=8.9.4"
     }
