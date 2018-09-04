@@ -15,5 +15,5 @@ export async function demoRequest(id: string) {
 }
 
 export async function testApi(data) {
-    return http.get('/data', data, DEFAULT_HTTP_OPTION)
+    return http.get('/blog/list', data, DEFAULT_HTTP_OPTION)
 }
