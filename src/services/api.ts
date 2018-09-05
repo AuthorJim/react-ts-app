@@ -24,3 +24,14 @@ export async function demoRequest(id: string) {
 export async function login(data) {
     return http.post('/user/login', data)
 }
+
+/**
+ * 注册
+ *
+ * @export
+ * @param {*} data
+ * @returns
+ */
+export async function register(data) {
+    return http.post('/user/register', data)
+}

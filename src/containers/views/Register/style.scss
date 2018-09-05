@@ -1,0 +1,22 @@
+@import 'styles/_base';
+
+.registerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    :global(.am-list) {
+        width: 100%;
+
+        :global(.am-list-body) {
+            background: #f3f5f7;
+        }
+    }
+}
+
+.amListItem {
+    padding-left: 0;
+
+    :global(.am-list-content) {
+        padding: 0 !important;
+    }
+}

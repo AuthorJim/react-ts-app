@@ -15,22 +15,22 @@ export interface IP {
 @observer
 class Login extends React.Component<IP> {
     @observable
-    private username: string = ''
+    private user: string = ''
     @observable
-    private password: string = ''
+    private pwd: string = ''
 
     @action
-    handleUsername = (username: string) => {
-        this.username = username
+    handleUsername = (user: string) => {
+        this.user = user
     }
 
     @action
-    handlePassword = (password: string) => {
-        this.password = password
+    handlePassword = (pwd: string) => {
+        this.pwd = pwd
     }
 
     handleLogin = async (): Promise<any> => {
-        this.props.userStore.login(this.username, this.password)
+        this.props.userStore.login(this.user, this.pwd)
     }
 
     handleRegister = () => {
@@ -43,7 +43,6 @@ class Login extends React.Component<IP> {
                 <Logo />
                 <List>
                     <InputItem onChange={this.handleUsername}>用户名</InputItem>
-                    <WhiteSpace />
                     <InputItem onChange={this.handlePassword} type="password">
                         密码
                     </InputItem>

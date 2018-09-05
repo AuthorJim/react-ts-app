@@ -12,6 +12,8 @@ Router.get('/list', function(req, res) {
 })
 Router.post('/login', function(req, res) {
     const { user, pwd } = req.body
+    console.log('=================user=================', user)
+    console.log('=================pwd=================', pwd)
     User.findOne({ user, pwd }, _filter, function(err, doc) {
         if (!doc) {
             return res.json({ code: 1, msg: '用户名或者密码错误' })
@@ -22,6 +24,10 @@ Router.post('/login', function(req, res) {
 })
 Router.post('/register', function(req, res) {
     const { user, pwd, type } = req.body
+    console.log('=================user=================', user)
+    console.log('=================pwd=================', pwd)
+    console.log('=================type=================', type)
+    // console.log('=================req================', req)
     User.findOne({ user }, function(err, doc) {
         if (doc) {
             return res.json({ code: 1, msg: '用户名重复' })
@@ -29,9 +35,6 @@ Router.post('/register', function(req, res) {
 
         const userModel = new User({ user, type, pwd })
         userModel.save(function(e, d) {
-            if (e) {
-                return res.json({ code: 1, msg: '后端出错了' })
-            }
             const { user, type, _id } = d
             res.cookie('userid', _id)
             return res.json({ code: 0, data: { user, type, _id } })
